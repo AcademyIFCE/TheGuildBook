@@ -1,10 +1,11 @@
 import SwiftUI
+import SwiftData
 
 struct AddCharacterView: View {
+    @Environment(\.modelContext)
+    private var modelContext
     
     @Environment(\.dismiss) private var dismiss
-    
-    @Binding var characters: [Character]
     
     @State private var name: String = ""
     @State private var level: Int = 1
@@ -53,9 +54,9 @@ struct AddCharacterView: View {
                             name: name,
                             job: job,
                             level: level,
-                            description: description.isEmpty ? nil : description
+                            characterDescription: description.isEmpty ? nil : description
                         )
-                        characters.append(newCharacter)
+                        modelContext.insert(newCharacter)
                         dismiss()
                     }
                     .disabled(name.isEmpty)
@@ -67,5 +68,5 @@ struct AddCharacterView: View {
 }
 
 #Preview {
-    AddCharacterView(characters: .constant([]))
+    AddCharacterView()
 }

@@ -4,7 +4,7 @@ struct EditCharacterView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Binding var character: Character
+    var character: Character
     
     @State private var name: String = ""
     @State private var description: String = ""
@@ -60,7 +60,7 @@ struct EditCharacterView: View {
                 name = character.name
                 job = character.job
                 level = character.level
-                description = character.description ?? ""
+                description = character.characterDescription ?? ""
             }
             
         }
@@ -70,11 +70,11 @@ struct EditCharacterView: View {
         character.name = name
         character.job = job
         character.level = level
-        character.description = description.isEmpty ? nil : description
+        character.characterDescription = description.isEmpty ? nil : description
     }
 }
 
 #Preview {
-    AddCharacterView(characters: .constant([]))
+    AddCharacterView()
 }
 

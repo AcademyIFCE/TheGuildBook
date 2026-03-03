@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct TheGuildBookApp: App {
@@ -6,5 +7,8 @@ struct TheGuildBookApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: [Character.self])
     }
 }
+
+
