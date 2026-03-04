@@ -51,5 +51,23 @@ struct CharactersListView: View {
 }
 
 #Preview {
-    CharactersListView()
+    do {
+        let configuration = ModelConfiguration()
+        let container = try ModelContainer(for: Character.self, configurations: configuration)
+        
+        let characterList: [Character] = [
+            Character(name: "Ashe", job: .archer, level: 1, characterDescription: "A good archer"),
+            Character(name: "Mason", job: .assassin, level: 1, characterDescription: "An good friend")
+        ]
+        
+        for character in characterList {
+            container.mainContext.insert(character)
+        }
+        
+        return CharactersListView()
+            .modelContainer(container)
+    } catch {
+        return CharactersListView()
+    }
+    
 }
